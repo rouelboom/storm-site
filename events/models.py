@@ -10,6 +10,7 @@ EVENT_TYPE_LIST = [('Warhammer40k', 'WH40K'),
 
 
 class Event(models.Model):
+    title = models.CharField('Название события', max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='author',
                                verbose_name='Автор события',
@@ -24,4 +25,4 @@ class Event(models.Model):
                                  help_text='Текущий опонент',
                                  blank=True,
                                  null=True)
-
+    description = models.CharField('Описание события', max_length=500)
