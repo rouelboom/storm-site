@@ -26,3 +26,5 @@ class Event(models.Model):
                                  blank=True,
                                  null=True)
     description = models.CharField('Описание события', max_length=500)
+    lobby_is_open = models.BooleanField('Статус поиска оппонента',
+                                        default=True)

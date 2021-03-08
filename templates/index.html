@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <button><a href="/new_event/">Создать мероприятие</a> </button>
+{% endif %}
+<br>
+
+{% for event in events %}
+    ----
+    <p>Событие: {{ event.title }}</p>
+    <p>Дата: {{ event.event_date }}</p>
+    <p>Организатор: {{ event.author.username }}</p>
+    {% if event.opponent %}
+        <p>Оппонент: {{ event.opponent.username }}</p>
+    {% endif %}
+    <p>СТАТУС:</p>
+    {% if user.is_authenticated %}
+        {% if not user == event.author %}
+            {% if event.lobby_is_open == True %}
+                <p><font color="orange">ВЕДЁТСЯ ПОИСК ОППОНЕНТА...</font></p>
+                --->
+                <button><a href="{% url 'events:reg_to_event' event_id=event.id %}">Присоединиться</a> </button>
+                <br>
+            {% else %}
+                <p><font color="green">ОППОНЕНТ НАЙДЕН!</font></p>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+</body>
+</html>
