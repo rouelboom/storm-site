@@ -14,11 +14,12 @@ class Event(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='author',
                                verbose_name='Автор события',
-                               help_text='Автор события')
+                               help_text='Автор события',
+                               null=True, blank=True)
     type = models.CharField('Тип события', max_length=50,
                             choices=EVENT_TYPE_LIST)
     pub_date = models.DateTimeField('Время создания события', auto_now_add=True)
-    event_date = models.DateTimeField('Время проведения события',)
+    event_date = models.DateTimeField('Время проведения события', null=True, blank=True)
     opponent = models.ForeignKey(User, on_delete=models.SET_NULL,
                                  related_name='opponent',
                                  verbose_name='Текущий опонент',
